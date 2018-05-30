@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>Tarea 3 J.P. Dattas</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: new google.maps.LatLng(-33.5, -70),
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBx-qnQy8GOH-ef5t2BO5BtLDpVhsH2YtM&callback=initMap">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script>
+    var socket = io('wss://integracion-tarea-3.herokuapp.com', {'path': '/flights'});
+        socket.on('POSITION', function(msg){
+          code = msg.code
+          position = msg.position
+          console.log(code);
+          console.log(position[0]);
+        });
+    </script>
+  </body>
+</html>
